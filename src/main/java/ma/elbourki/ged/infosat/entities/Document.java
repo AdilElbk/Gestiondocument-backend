@@ -2,16 +2,21 @@ package ma.elbourki.ged.infosat.entities;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Document {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idDocument;
+	private String tiquette;
 
 	private String nomDocument;
 	private String descriptionDocument;
@@ -19,12 +24,23 @@ public class Document {
 	private String fichier;
 	private boolean isPublic;
 
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Dossier dossier;
+
 	public Long getIdDocument() {
 		return idDocument;
 	}
 
 	public void setIdDocument(Long idDocument) {
 		this.idDocument = idDocument;
+	}
+
+	public String getTiquette() {
+		return tiquette;
+	}
+
+	public void setTiquette(String tiquette) {
+		this.tiquette = tiquette;
 	}
 
 	public String getNomDocument() {
@@ -67,24 +83,28 @@ public class Document {
 		this.isPublic = isPublic;
 	}
 
-	public Document(String nomDocument, String descriptionDocument, Date date, String fichier, boolean isPublic) {
+	public Dossier getDossier() {
+		return dossier;
+	}
+
+	public void setDossier(Dossier dossier) {
+		this.dossier = dossier;
+	}
+
+	public Document(String tiquette, String nomDocument, String descriptionDocument, Date date, String fichier,
+			boolean isPublic, Dossier dossier) {
 		super();
+		this.tiquette = tiquette;
 		this.nomDocument = nomDocument;
 		this.descriptionDocument = descriptionDocument;
 		this.date = date;
 		this.fichier = fichier;
 		this.isPublic = isPublic;
+		this.dossier = dossier;
 	}
 
 	public Document() {
 		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public String toString() {
-		return "Document [idDocument=" + idDocument + ", nomDocument=" + nomDocument + ", descriptionDocument="
-				+ descriptionDocument + ", date=" + date + ", fichier=" + fichier + ", isPublic=" + isPublic + "";
 	}
 
 }
