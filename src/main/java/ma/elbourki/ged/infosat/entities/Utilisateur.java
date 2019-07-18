@@ -11,17 +11,16 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Dossier implements Serializable{
+public class Utilisateur implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	Long idDossier;
-
-	String nomDossier;
-	String descriptionDossier;
-
+	Long idUtilisateur;
+	String nomUtilisateur;
+	String prenomUtilisateur;
+	String tel;
+	
 }
