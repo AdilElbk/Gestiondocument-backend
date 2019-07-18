@@ -16,27 +16,27 @@ import ma.elbourki.ged.infosat.repositories.DossierJpaRepository;
 @RestController
 @RequestMapping("/api/v1/dossiers")
 public class DossierController {
-	
+
 	@Autowired
-	private DossierJpaRepository dossierJpaRepo ; 
-	
-	//afficher tous les dossiers
+	private DossierJpaRepository dossierJpaRepo;
+
+	// afficher tous les dossiers
 	@GetMapping
-	public List<Dossier> afficherTousLesDossiers(){
+	public List<Dossier> afficherTousLesDossiers() {
 		return dossierJpaRepo.findAll();
 	}
-	
-	//afficher un dossier précis
+
+	// afficher un dossier précis
 	@GetMapping("/{id}")
 	public Dossier afficherDossiers(@PathVariable("id") Long id) {
 		return dossierJpaRepo.getOne(id);
-		
+
 	}
-	//ajouter un dossier 
+
+	// ajouter un dossier
 	@PostMapping
 	public Dossier modifierDossier(@RequestBody Dossier dossier) {
 		return dossierJpaRepo.save(dossier);
 	}
-	
-	
+
 }
