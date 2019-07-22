@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1" />
+<title>Gestion Des Documents-Module-LGP</title>
+</head>
+<body>
+	<!-- 	<thead> -->
+	<!-- 		<tr> -->
+	<!-- 			<th>ID</th> -->
+	<!-- 			<th>DATE DE NAISSANCE</th> -->
+	<!-- 			<th>NOM</th> -->
+	<!-- 			<th>PHOTO</th> -->
+	<!-- 			<th>EMAIL</th> -->
+	<!-- 		</tr> -->
+	<!-- 	<tbody> -->
+	<!-- 		<tr th:each="e:${etudiant}"> -->
+	<!-- 			<td th:text="${e.id}"></td> -->
+	<!-- 			<td th:text="${e.dateNaissance}"></td> -->
+	<!-- 			<td th:text="${e.nom}"></td> -->
+	<!-- 			<td th:text="${e.photo}"></td> -->
+	<!-- 			<td th:text="${e.email}"></td> -->
+
+	<!-- 		</tr> -->
+	<!-- 	</tbody> -->
+	<!-- 	</thead> -->
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Nom document</th>
+				<th>date</th>
+				<th>Description Document</th>
+				<th>Fichier</th>
+				<th>date d'acces document</th>
+				<th>nom dossier</th>
+
+			</tr>
+		</thead>
+
+		<tbody>
+		<!-- enctype ="multipart/form-data" -->
+			<tr th:each="d:${documents}">
+
+				<td th:text="${d.idDocument}"></td>
+				<td th:text="${d.nomDocument}"></td>
+				<td th:text="${d.date}"></td>
+				<td th:text="${d.descriptionDocument}"></td>
+				<td th:text="${d.fichier}"></td>
+				<!-- 			<td th:text="${d.isPublic}"></td> -->
+<!-- 				<td th:text="${d.accesDocument.dateAccesDocument}"></td> -->
+<!-- 				<td th:text="${d.dossier.nomDossier}"></td> -->
+			</tr>
+		</tbody>
+	</table>
+	
+	<a href="/api/v1/documents/ajouter-document">ajouter documnet</a>
+		
+</body>
+</html>
