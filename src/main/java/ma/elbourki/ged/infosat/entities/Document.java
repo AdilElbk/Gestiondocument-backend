@@ -9,7 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -26,20 +28,26 @@ public class Document implements Serializable{
 	@Id
 	@GeneratedValue(strategy =GenerationType.IDENTITY )
 	Long idDocument;
+	//@NotEmpty
 	String nomDocument;
+	//@NotEmpty
 	String descriptionDocument;
+	//@Lob
+	//@NotEmpty
 	String fichier;
-	
+	//@NotEmpty
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	Date date;
-	boolean isPublic;
-	@ManyToOne(cascade = CascadeType.ALL)
 	
+	boolean isPublic;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
 	private AccesDocument accesDocument;
-//	Date dateAcces = accesDocument.dateAccesDocument;
+
+	//	Date dateAcces = accesDocument.dateAccesDocument;
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_dossier")
 	private Dossier dossier;
-//	String nomDossier = dossier.nomDossier;
+	//	String nomDossier = dossier.nomDossier;
 	
 }

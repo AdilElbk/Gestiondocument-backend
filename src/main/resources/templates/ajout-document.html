@@ -10,7 +10,8 @@
 	<h1>Ajouter un document</h1>
 	<table>
 		<form th:action="@{/api/v1/documents/ajouter-document}"
-			th:object="${document}" method="post">
+			th:object="${document}" method="post"
+			enctype="multipart/form-data">
 			<tr>
 				<td>ID:</td>
 				<td><input type="text" th:field="*{idDocument}" /></td>
@@ -29,7 +30,7 @@
 		</tr>
 		<tr>
 			<td>fichier:</td>
-			<td><input type="file" th:field="*{fichier}" /></td>
+			<td><input type="file" name ="file"/> </td> <!-- th:field="*{fichier}"  -->
 		</tr>
 		<tr>
 			<td>date acces document :</td>
