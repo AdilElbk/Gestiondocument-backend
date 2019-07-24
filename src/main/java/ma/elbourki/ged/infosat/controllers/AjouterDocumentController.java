@@ -21,39 +21,31 @@ import ma.elbourki.ged.infosat.repositories.DocumentJpaRepository;
 @Controller
 @RequestMapping("/api/v1/documents")
 public class AjouterDocumentController {
-	
+	// l'injection de documentJpaRepository dans le controlleur
 	@Autowired
 	DocumentJpaRepository documentJpaRepository;
-	
-//	@Value("${dir.files}")
-//	private String fileDir;
 
+	/***************** Ajouter Le Document dans BD *************/
 	@GetMapping("/ajouter-document")
 	public String documentForm(Model model) {
-
 		model.addAttribute("document", new Document());
 		return "ajout-document";
-
 	}
 
+	/***************** Upload le document dans un dossier ************/
 	@PostMapping("/ajouter-document")
-	public String documentAjout(@ModelAttribute("document") Document document,BindingResult bindingResult,
-		@RequestParam(name = "file") MultipartFile fichier) {
+	public String documentAjout(@ModelAttribute("document") Document document, BindingResult bindingResult,
+			@RequestParam(name = "file") MultipartFile fichier) {
 		try {
-			System.out.println("------------------------------");
-			System.out.println(fichier.getOriginalFilename());
 			document.setFichier(fichier.getOriginalFilename());
-			fichier.transferTo(new File(System.getProperty("user.home")+"/sco/"+fichier.getOriginalFilename()));
-//			fichier.transferTo(new File(fileDir));	
+			fichier.transferTo(new File(System.getProperty("user.home") + "/devis/" + fichier.getOriginalFilename()));
 		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		documentJpaRepository.save(document);
 		return "result";
 	}
+
 }

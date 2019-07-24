@@ -3,6 +3,8 @@
 <head>
 <meta charset="ISO-8859-1" />
 <title>Gestion Des Documents-Module-LGP</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </head>
 <body>
 	<!-- 	<thead> -->
@@ -32,14 +34,16 @@
 				<th>date</th>
 				<th>Description Document</th>
 				<th>Fichier</th>
+					<th>Operation</th>
 				<th>date d'acces document</th>
 				<th>nom dossier</th>
+			
 
 			</tr>
 		</thead>
 
 		<tbody>
-		<!-- enctype ="multipart/form-data" -->
+			<!-- enctype ="multipart/form-data" -->
 			<tr th:each="d:${documents}">
 
 				<td th:text="${d.idDocument}"></td>
@@ -48,13 +52,22 @@
 				<td th:text="${d.descriptionDocument}"></td>
 				<td th:text="${d.fichier}"></td>
 				<!-- 			<td th:text="${d.isPublic}"></td> -->
-<!-- 				<td th:text="${d.accesDocument.dateAccesDocument}"></td> -->
-<!-- 				<td th:text="${d.dossier.nomDossier}"></td> -->
+				<!-- 				<td th:text="${d.accesDocument.dateAccesDocument}"></td> -->
+				<!-- 				<td th:text="${d.dossier.nomDossier}"></td> -->
+				
+				 <td><a href="/api/v1/documents/files/${filename:.}">Telecharger </a>
+				<a href="#">Visualiser </a>
+				<a href="#">Imprimer </a>
+				<a href="#">transferer </a></td>
 			</tr>
 		</tbody>
 	</table>
-	
+
 	<a href="/api/v1/documents/ajouter-document">ajouter documnet</a>
-		
+
 </body>
 </html>
+
+
+
+
