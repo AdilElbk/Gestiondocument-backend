@@ -31,5 +31,5 @@ public class Dossier implements Serializable{
 	List<Document>documents = new ArrayList<Document>();
 
 	
-	Dossier dossier;
+	//Dossier dossier;
 }

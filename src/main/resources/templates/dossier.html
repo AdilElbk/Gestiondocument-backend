@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Nom Dossier</th>
+				<th>Description Dossier</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- enctype ="multipart/form-data" -->
+			<tr th:each="d:${dossiers}">
+				<td th:text="${d.idDossier}"></td>
+				<td th:text="${d.nomDossier}"></td>
+				<td th:text="${d.descriptionDossier}"></td>
+				<!-- 			<td th:text="${d.isPublic}"></td> -->
+				<!-- 				<td th:text="${d.accesDocument.dateAccesDocument}"></td> -->
+				<!-- 				<td th:text="${d.dossier.nomDossier}"></td> -->
+			</tr>
+			<tr><a href="/api/v1/dossiers/formulaire-dossier"></a></tr>
+		</tbody>
+	</table>
+</body>
+</html>

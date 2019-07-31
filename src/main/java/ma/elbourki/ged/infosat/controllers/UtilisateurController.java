@@ -3,31 +3,40 @@ package ma.elbourki.ged.infosat.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import ma.elbourki.ged.infosat.entities.Utilisateur;
 import ma.elbourki.ged.infosat.repositories.UtilisateurJpaRepository;
 
-@RestController
-@RequestMapping("/api/v1/utilisateurs")
-public class UtilisateurController {
-
+@Controller
+@RequestMapping("/api/v1/documents")
+class UtilisateurController {
 	@Autowired
-	private UtilisateurJpaRepository utilisateurJpaRepository;
-	
-	@GetMapping
-	public List<Utilisateur> afficherUtilisateurs(){
-		return utilisateurJpaRepository.findAll();
+	UtilisateurJpaRepository utilisateurJpaRepository;
+
+	// liste des utilisateurs
+	@GetMapping("/utilisateurs")
+	public String listeUtilisateur(Model model) {
+		List<Utilisateur> utilisateurs = utilisateurJpaRepository.findAll();
+		model.addAttribute("utilisateurs", utilisateurs);
+		return "utilisateurs";
 	}
-	
-	@GetMapping("/{id}")
-	public Utilisateur afficherUnUtilisateur(@PathVariable("id") Long idUtilisateur) {
-		return utilisateurJpaRepository.getOne(idUtilisateur);
+
+	// ajouter un utilisateur
+	@GetMapping("/formulaire-utilisateur")
+	public String formulaireUtilisateur(Model model) {
+		model.addAttribute("utilisateur", new Utilisateur());
+		return "form-user";
 	}
-	
-	
-	
+
+	@PostMapping("/ajouter-utilisateur")
+	public String ajouterUtilisateir(@ModelAttribute("utilisateir") Utilisateur utilisateur) {
+		utilisateurJpaRepository.save(utilisateur);
+		return "success";
+	}
 }

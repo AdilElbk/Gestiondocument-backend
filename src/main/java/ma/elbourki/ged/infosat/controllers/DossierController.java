@@ -3,40 +3,40 @@ package ma.elbourki.ged.infosat.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import ma.elbourki.ged.infosat.entities.Dossier;
 import ma.elbourki.ged.infosat.repositories.DossierJpaRepository;
 
-@RestController
+@Controller
 @RequestMapping("/api/v1/dossiers")
-public class DossierController {
-
+class DossierController {
 	@Autowired
-	private DossierJpaRepository dossierJpaRepo;
+	DossierJpaRepository dossierJpaRepository;
 
-	// afficher tous les dossiers
-	@GetMapping
-	public List<Dossier> afficherTousLesDossiers() {
-		return dossierJpaRepo.findAll();
-	}
-
-	// afficher un dossier précis
-	@GetMapping("/{id}")
-	public Dossier afficherDossiers(@PathVariable("id") Long id) {
-		return dossierJpaRepo.getOne(id);
-
+	// lister tous les dossiers
+	@GetMapping("/dossier")
+	public String afficherDossier(Model model) {
+		List<Dossier> dossiers = dossierJpaRepository.findAll();
+		model.addAttribute("dossiers", dossiers);
+		return "dossier";
 	}
 
 	// ajouter un dossier
-	@PostMapping
-	public Dossier modifierDossier(@RequestBody Dossier dossier) {
-		return dossierJpaRepo.save(dossier);
+	@GetMapping("/formulaire-dossier")
+	public String dossierForm(Model model) {
+		model.addAttribute("dossier", new Dossier());
+		return "dossier-form";
 	}
-
+	
+	@PostMapping("/ajouter-dossier")
+	public String ajouterDossier(@ModelAttribute("dossier") Dossier dossier) {
+		dossierJpaRepository.save(dossier);
+		return "success";
+	}
 }

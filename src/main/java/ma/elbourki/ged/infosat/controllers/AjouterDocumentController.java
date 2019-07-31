@@ -24,28 +24,28 @@ public class AjouterDocumentController {
 	// l'injection de documentJpaRepository dans le controlleur
 	@Autowired
 	DocumentJpaRepository documentJpaRepository;
+//
+//	/***************** Ajouter Le Document dans BD *************/
+//	@GetMapping("/ajouter-document")
+//	public String documentForm(Model model) {
+//		model.addAttribute("document", new Document());
+//		return "ajout-document";
+//	}
 
-	/***************** Ajouter Le Document dans BD *************/
-	@GetMapping("/ajouter-document")
-	public String documentForm(Model model) {
-		model.addAttribute("document", new Document());
-		return "ajout-document";
-	}
-
-	/***************** Upload le document dans un dossier ************/
-	@PostMapping("/ajouter-document")
-	public String documentAjout(@ModelAttribute("document") Document document, BindingResult bindingResult,
-			@RequestParam(name = "file") MultipartFile fichier) {
-		try {
-			document.setFichier(fichier.getOriginalFilename());
-			fichier.transferTo(new File(System.getProperty("user.home") + "/devis/" + fichier.getOriginalFilename()));
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		documentJpaRepository.save(document);
-		return "result";
-	}
+//	/***************** Upload le document dans un dossier ************/
+//	@PostMapping("/ajouter-document")
+//	public String documentAjout(@ModelAttribute("document") Document document, BindingResult bindingResult,
+//			@RequestParam(name = "file") MultipartFile fichier) {
+//		try {
+//			document.setFichier(fichier.getOriginalFilename());
+//			fichier.transferTo(new File(System.getProperty("user.home") + "/devis/" + fichier.getOriginalFilename()));
+//		} catch (IllegalStateException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		documentJpaRepository.save(document);
+//		return "result";
+//	}
 
 }

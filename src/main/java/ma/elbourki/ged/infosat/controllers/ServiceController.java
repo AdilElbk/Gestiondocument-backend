@@ -2,31 +2,40 @@ package ma.elbourki.ged.infosat.controllers;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
+import ma.elbourki.ged.infosat.entities.Groupe;
 import ma.elbourki.ged.infosat.entities.Service;
 import ma.elbourki.ged.infosat.repositories.ServiceJpaRepository;
 
-@RestController
-@RequestMapping("/api/v1/services")
-public class ServiceController {
+@Controller
+@RequestMapping("/api/v1/documents")
+class ServiceController {
+	@Autowired
 	ServiceJpaRepository serviceJpaRepository;
 
-	@GetMapping
-	public List<Service> afficherServices() {
+	@GetMapping("services")
+	public String listServices(Model model) {
 
-		return serviceJpaRepository.findAll();
+		List<Service> services = serviceJpaRepository.findAll();
+
+		return "";
+	}
+	@GetMapping("/formulaire-service")
+	public String formulaireGroupe(Model model) {
+		model.addAttribute("service", new Service());
+		return "form-service";
 	}
 
-	@GetMapping("/{id}")
-	public Service afficherUnService(@PathVariable("id") Long idService) {
-		return serviceJpaRepository.getOne(idService);
+	@PostMapping("/ajouter-service")
+	public String ajouterGroupe(@ModelAttribute("service") Service service) {
+		serviceJpaRepository.save(service);
+		return "success";
 	}
-/*
-	@PostMapping("/{id}")
-	public Service ajouterService()
-*/
 }

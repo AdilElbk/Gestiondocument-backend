@@ -15,5 +15,4 @@ public class Service {
 	Long idService ;
 	String nomService;
 	String descriptionService;
-	
 }
