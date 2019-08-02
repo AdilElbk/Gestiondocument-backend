@@ -73,10 +73,10 @@ public class DocumentContoller {
 		if (file.exists()) {
 			String mimeType = URLConnection.guessContentTypeFromName(file.getName());
 			if (mimeType == null) {
-				mimeType = "application/pdf";
+				mimeType = "application/octet-stream ";
 			}
 			response.setContentType(mimeType);
-			response.setHeader("Content-Disposition", String.format("inline; filename=\"" + file.getName() + "\""));
+			response.setHeader("Content-Disposition", String.format("attachment; filename=\"" + file.getName() + "\""));
 			// response.setHeader("Content-Disposition", String.format("attachment;
 			// filename=\"" + file.getName() + "\""));
 			response.setContentLength((int) file.length());

@@ -13,7 +13,7 @@ public class Groupe {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Long idGroupe;
-	String nomDocument;
-	String descriptionDocument;
+	String nomGroupe;
+	String descriptionGroupe;
 
 }

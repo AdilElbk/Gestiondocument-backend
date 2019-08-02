@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ma.elbourki.ged.infosat.entities.Dossier;
+import ma.elbourki.ged.infosat.repositories.DocumentJpaRepository;
 import ma.elbourki.ged.infosat.repositories.DossierJpaRepository;
 
 @Controller
@@ -18,6 +19,10 @@ import ma.elbourki.ged.infosat.repositories.DossierJpaRepository;
 class DossierController {
 	@Autowired
 	DossierJpaRepository dossierJpaRepository;
+	
+	@Autowired
+	DocumentJpaRepository documentJpaRepository;
+	
 
 	// lister tous les dossiers
 	@GetMapping("/dossier")
@@ -39,4 +44,5 @@ class DossierController {
 		dossierJpaRepository.save(dossier);
 		return "success";
 	}
+	
 }

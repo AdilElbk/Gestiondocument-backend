@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -45,9 +46,27 @@ public class Document implements Serializable{
 	private AccesDocument accesDocument;
 
 	//	Date dateAcces = accesDocument.dateAccesDocument;
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_dossier")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_dossier",nullable = false)
 	private Dossier dossier;
 	//	String nomDossier = dossier.nomDossier;
+	
+	
+	public Long getDossierId() {
+		return dossier.getIdDossier();
+	}
+	
+	public String getDossierName() {
+		
+		return dossier.getNomDossier();
+	}
+	
+	public Dossier getDossier() {
+		return dossier;
+	}
+
+	public String getDescDossier() {
+		return dossier.getDescriptionDossier();
+	}
 	
 }
