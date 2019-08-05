@@ -11,18 +11,19 @@
 	crossorigin="anonymous">
 
 </head>
-<body class="container">
+<body>
 	<h1>Ajouter un document</h1>
 	<div class="">
 	<table>
 		
-		<form th:action="@{/api/v1/documents/ajouter-document}"
+		<form th:action="@{/api/v1/documents/update/{id}(id=${document.idDocument})}"
 			th:object="${document}" method="post" enctype="multipart/form-data">
 			<div class="form-row">
 				<div class="col">
 					<tr>
 						<td>ID:</td>
-						<td><input type="text" class="form-control"
+						<td><input type="text" class="form-control disabled"
+						
 							placeholder="Id document" th:field="*{idDocument}" /></td>
 					</tr>
 				</div>
@@ -60,7 +61,7 @@
 					</tr>
 				</div>
 			</div>
-		<td><input class="form-control btn btn-primary" type="submit" value="Ajouter" /></td>
+		<td><input class="form-control btn btn-primary" type="submit" value="Valider" /></td>
 	<td><a href="/api/v1/documents/documents">listes des documents</a></td> 
 		</tr>
 		</form>

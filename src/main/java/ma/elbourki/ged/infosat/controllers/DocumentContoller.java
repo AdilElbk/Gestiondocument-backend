@@ -10,8 +10,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -29,6 +31,8 @@ import ma.elbourki.ged.infosat.entities.Document;
 import ma.elbourki.ged.infosat.repositories.DocumentJpaRepository;
 
 @Controller
+//@RestController
+//@CrossOrigin(origins = 	"http://localhost:4200")
 @RequestMapping("/api/v1/documents")
 public class DocumentContoller {
 	@Autowired
@@ -36,7 +40,7 @@ public class DocumentContoller {
 	private static final String EXTERNAL_FILE_PATH = "C:/Users/ADIL EL BOURKI/devis";
 
 	/***************** Lister les documents Le Document dans BD ******************/
-	@GetMapping("/document")
+	@GetMapping("/documents")
 	public String listDocument(Model model) {
 		List<Document> docs = documentJpaRepository.findAll();
 		model.addAttribute("documents", docs);
@@ -49,14 +53,16 @@ public class DocumentContoller {
 		model.addAttribute("document", new Document());
 		return "ajout-document";
 	}
-
+	
 	/***************** Upload le document dans un dossier ************/
 	@PostMapping("/ajouter-document")
 	public String documentAjout(@ModelAttribute("document") Document document, BindingResult bindingResult,
 			@RequestParam(name = "file") MultipartFile fichier) {
 		try {
-			document.setFichier(fichier.getName());
+			document.setFichier(fichier.getName());			
+				System.out.println("Here 1");
 			fichier.transferTo(new File(System.getProperty("user.home") + "/devis/" + fichier.getOriginalFilename()));
+			System.out.println("Here 2");
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -65,7 +71,8 @@ public class DocumentContoller {
 		documentJpaRepository.save(document);
 		return "result";
 	}
-	/**********************Telecharger**********************/
+
+	/********************** Telecharger **********************/
 	@GetMapping("/file/{fileName:.+}")
 	public void downloadFichier(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable("fileName") String fileName) throws IOException {
@@ -85,7 +92,56 @@ public class DocumentContoller {
 
 		}
 	}
+//	/******************* Update *******************/
 
+//	@PutMapping("/updatedoc/{id}")
+//	public Document modifierDocument(@PathVariable("id") Long idDocument, @RequestBody Document document) {
+//		Document newDocument = documentJpaRepository.findById(idDocument).get();
+//		newDocument.setDossier(document.getDossier());
+//		newDocument.setDate(document.getDate());
+//		newDocument.setDescriptionDocument(document.getDescriptionDocument());
+//		newDocument.setFichier(document.getFichier());
+//		newDocument.setNomDocument(document.getNomDocument());
+//
+//		return document;
+//	}
+
+	@GetMapping("/edit/{id}")
+	public String updateForm(@PathVariable("id") Long id, Model model) {
+		Document document = documentJpaRepository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("id non trouvable" + id));
+		model.addAttribute("document", document);
+		return "update-document";
+	}
+
+	@PostMapping("/update/{id}")
+	public String updateDocument(@PathVariable("id") Long id, @Valid Document document, BindingResult result,
+			Model model) {
+		if(result.hasErrors()) {
+			document.setIdDocument(id);
+			return "update-document";
+		}
+		documentJpaRepository.save(document);
+		model.addAttribute("documents",documentJpaRepository.findAll());
+		return "document";
+	}
+
+	/***************** Delete *******************/
+//
+//	@DeleteMapping("/delete/{id}")
+//	public ResponseEntity<Long> supprimerDocument(@PathVariable Long id) {
+//		documentJpaRepository.deleteById(id);
+//		return null;
+//	}
+
+	@GetMapping("/delete/{id}")
+	public String deleteDocument(@PathVariable("id") Long id, Model model) {
+		Document document = documentJpaRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("not found"+id));
+		documentJpaRepository.delete(document);
+		model.addAttribute("documents",documentJpaRepository.findAll());
+		return "document";
+		
+	}
 }
 
 //	

@@ -13,8 +13,7 @@ public class Departement {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Long idDepartement;
-
 	String nomDepartement;
 	String DescriptionDepartement;
-
+	
 }
