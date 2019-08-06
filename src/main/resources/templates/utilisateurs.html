@@ -10,26 +10,22 @@
 
 </head>
 <body>
-	<!-- 	<thead> -->
-	<!-- 		<tr> -->
-	<!-- 			<th>ID</th> -->
-	<!-- 			<th>DATE DE NAISSANCE</th> -->
-	<!-- 			<th>NOM</th> -->
-	<!-- 			<th>PHOTO</th> -->
-	<!-- 			<th>EMAIL</th> -->
-	<!-- 		</tr> -->
-	<!-- 	<tbody> -->
-	<!-- 		<tr th:each="e:${etudiant}"> -->
-	<!-- 			<td th:text="${e.id}"></td> -->
-	<!-- 			<td th:text="${e.dateNaissance}"></td> -->
-	<!-- 			<td th:text="${e.nom}"></td> -->
-	<!-- 			<td th:text="${e.photo}"></td> -->
-	<!-- 			<td th:text="${e.email}"></td> -->
 
-	<!-- 		</tr> -->
-	<!-- 	</tbody> -->
-	<!-- 	</thead> -->
-	<table>
+	<nav class="navbar navbar-light bg-light">
+		<a class="navbar-brand">Gestion des document</a>
+		<form class="form-inline">
+			<input class="form-control mr-sm-2" type="search"
+				placeholder="Search" aria-label="Search"> <a
+				class="btn btn-success my-2 my-sm-0" type="submit"
+				href="/api/v1/documents/ajouter-">Ajouter Un Utilisateur</a> 
+				<a
+				class="btn btn-danger my-2 my-sm-0" type="submit"
+				href="/api/v1/documents/ajouter-document">Supprimer tous</a>
+
+		</form>
+	</nav>
+
+		<table class="table">
 		<thead>
 			<tr>
 				<th>ID</th>

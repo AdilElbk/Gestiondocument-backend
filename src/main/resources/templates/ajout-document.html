@@ -9,63 +9,43 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
-
+<style type="text/css">
+</style>
 </head>
 <body class="container">
-	<h1>Ajouter un document</h1>
 	<div class="">
-	<table>
-		
-		<form th:action="@{/api/v1/documents/ajouter-document}"
-			th:object="${document}" method="post" enctype="multipart/form-data">
-			<div class="form-row">
-				<div class="col">
-					<tr>
-						<td>ID:</td>
-						<td><input type="text" class="form-control"
-							placeholder="Id document" th:field="*{idDocument}" /></td>
-					</tr>
-				</div>
+		<table>
+			<form th:action="@{/api/v1/documents/ajouter-document}"
+				th:object="${document}" method="post" enctype="multipart/form-data">
 
-				<div class="col">
-					<tr>
-						<td>Nom document:</td>
-						<td><input type="text" class="form-control"
-							placeholder="Nom Document" th:field="*{nomDocument}" /></td>
-					</tr>
-				</div>
-			</div>
+				<div class="form-group">
 
-			<div class="form-row">
-				<div class="col">
-					<tr>
-						<td>Description:</td>
-						<td><input class="form-control" placeholder="Description"
-							type="text" th:field="*{descriptionDocument}" /></td>
-					</tr>
+					<label> Nom document:</label> <input type="text"
+						class="form-control" placeholder="Nom Document"
+						th:field="*{nomDocument}" />
 				</div>
+				<div class="form-group">
+					<label>Description:</label>
+					<textarea class="form-control" placeholder="Description"
+						type="text" th:field="*{descriptionDocument}" rows="3"></textarea>
+				</div>
+				<div class="form-group">
 
-				<div class="col">
-					<tr>
-						<td>date:</td>
-						<td><input type="datetime" th:field="*{date}"
-							class="form-control" placeholder="Date" /></td>
-					</tr>
+					<label>date:</label> <input type="datetime" th:field="*{date}"
+						class="form-control" placeholder="Date" />
 				</div>
-				<div class="col">
-					<tr>
-						<td>fichier:</td>
-						<td><input class="form-control" type="file" name="file" /></td>
-						<!-- th:field="*{fichier}"  -->
-					</tr>
+				<div class="form-group">
+
+					<label>fichier:</label> <input class="form-control " type="file"
+						name="file" />
 				</div>
-			</div>
-		<td><input class="form-control btn btn-primary" type="submit" value="Ajouter" /></td>
-	<td><a href="/api/v1/documents/documents">listes des documents</a></td> 
-		</tr>
-		</form>
-	</table>
+				<input class="form-control-sm btn btn-primary" type="submit"
+					value="Confirmer" /> <a href="/api/v1/documents/documents">listes
+					des documents</a>
+
+			</form>
+		</table>
 	</div>
-	
+
 </body>
 </html>

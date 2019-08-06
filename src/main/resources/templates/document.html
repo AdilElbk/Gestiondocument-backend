@@ -10,6 +10,19 @@
 
 </head>
 <body>
+	<nav class="navbar navbar-light bg-light">
+		<a class="navbar-brand">Gestion des document</a>
+		<form class="form-inline">
+			<input class="form-control mr-sm-2" type="search"
+				placeholder="Search" aria-label="Search"> <a
+				class="btn btn-success my-2 my-sm-0" type="submit"
+				href="/api/v1/documents/ajouter-document">Ajouter Un document</a> 
+				<a
+				class="btn btn-danger my-2 my-sm-0" type="submit"
+				href="/api/v1/documents/ajouter-document">Supprimer tous</a>
+
+		</form>
+	</nav>
 	<table class="table">
 		<thead>
 			<tr>
@@ -31,16 +44,20 @@
 				<td th:text="${d.date}"></td>
 				<td th:text="${d.descriptionDocument}"></td>
 				<td th:text="${d.fichier}"></td>
-				<td><a href="@{/api/v1/documents/file/${fileName}}"
+				<td><a class ="btn btn-primary" href="@{/api/v1/documents/file/${fileName}}"
 					name="fileName">Telecharger</a>
-					<a th:href="@{/api/v1/documents/edit/{id}(id=${d.idDocument})}">Modifier
-				</a> <a th:href="@{/api/v1/documents/delete/{id}(id=${d.idDocument})}">Supprimer</a>
+					<a class="btn btn-success"
+					th:href="@{/api/v1/documents/edit/{id}(id=${d.idDocument})}">Modifier
+				</a>
+				 <a
+					class="btn btn-danger"				 
+				  th:href="@{/api/v1/documents/delete/{id}(id=${d.idDocument})}">Supprimer</a>
 				</td>
 			</tr>
 		</tbody>
 	</table>
 
-	<a href="/api/v1/documents/ajouter-document">ajouter documnet</a>
+	<!-- 	<a href="/api/v1/documents/ajouter-document">ajouter documnet</a> -->
 
 </body>
 </html>

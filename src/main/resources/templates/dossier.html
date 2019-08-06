@@ -3,9 +3,28 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+
 </head>
 <body>
-	<table>
+
+	<nav class="navbar navbar-light bg-light">
+		<a class="navbar-brand">Gestion des document</a>
+		<form class="form-inline">
+			<input class="form-control mr-sm-2" type="search"
+				placeholder="Search" aria-label="Search"> <a
+				class="btn btn-success my-2 my-sm-0" type="submit"
+				href="/api/v1/documents/ajouter-document">Ajouter Un Dossier</a> 
+				<a
+				class="btn btn-danger my-2 my-sm-0" type="submit"
+				href="/api/v1/documents/ajouter-document">Supprimer tous</a>
+
+		</form>
+	</nav>
+	<table class="table">
 		<thead>
 			<tr>
 				<th>ID</th>
@@ -22,7 +41,9 @@
 				<!-- 			<td th:text="${d.isPublic}"></td> -->
 				<!-- 				<td th:text="${d.accesDocument.dateAccesDocument}"></td> -->
 				<!-- 				<td th:text="${d.dossier.nomDossier}"></td> -->
+				
 			</tr>
+			
 			<tr><a href="/api/v1/dossiers/formulaire-dossier"></a></tr>
 		</tbody>
 	</table>

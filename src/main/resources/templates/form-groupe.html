@@ -5,8 +5,7 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body>
-<body>
+<body class="container">
 	<h1>Ajouter un document</h1>
 	<table>
 		<form th:action="@{/api/v1/documents/formulaire-groupe}"
@@ -22,7 +21,7 @@
 			<tr>
 				<td>Description :</td>
 				<td><input type="text" th:field="*{descriptionGroupe}" /></td>
-			</tr>
+			</tr>	
 
 			<tr>
 				<td><input type="submit" value="valider"></td>

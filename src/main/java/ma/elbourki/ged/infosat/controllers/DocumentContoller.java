@@ -46,21 +46,19 @@ public class DocumentContoller {
 		model.addAttribute("documents", docs);
 		return "document";
 	}
-
 	/***************** Ajouter Le Document dans BD ************************/
 	@GetMapping("/ajouter-document")
 	public String documentForm(Model model) {
 		model.addAttribute("document", new Document());
 		return "ajout-document";
 	}
-	
 	/***************** Upload le document dans un dossier ************/
 	@PostMapping("/ajouter-document")
 	public String documentAjout(@ModelAttribute("document") Document document, BindingResult bindingResult,
 			@RequestParam(name = "file") MultipartFile fichier) {
 		try {
 			document.setFichier(fichier.getName());			
-				System.out.println("Here 1");
+			System.out.println("Here 1");
 			fichier.transferTo(new File(System.getProperty("user.home") + "/devis/" + fichier.getOriginalFilename()));
 			System.out.println("Here 2");
 		} catch (IllegalStateException e) {
@@ -141,6 +139,11 @@ public class DocumentContoller {
 		model.addAttribute("documents",documentJpaRepository.findAll());
 		return "document";
 		
+	}
+	@GetMapping("/deleteAll")
+	public String deleteAll() {
+		documentJpaRepository.deleteAll();
+		return "document";
 	}
 }
 
